@@ -1,15 +1,12 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 import 'colors';
 import cors from 'cors';
 import morgan from 'morgan';
-import {Request, Response} from "express";
 import {PORT} from "./config/config";
+import {initDB} from "./config/db";
 
 // rest object
 const app = express();
-
-// db connection
-// connectDB();
 
 // middlewares
 app.use(cors());
@@ -24,6 +21,8 @@ app.get('/', (req: Request, res: Response): Response => {
 
 const port = PORT || 4000;
 
-app.listen(port, () => {
-    console.log(`Server Running on ${port}`.gray.bold);
+initDB().then(() => {
+    app.listen(port, () => {
+        console.log(`Server Running on ${port}`.gray.bold);
+    });
 });

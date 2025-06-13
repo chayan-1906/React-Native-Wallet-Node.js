@@ -1,5 +1,3 @@
-import {config} from "dotenv";
+import "dotenv/config";
 
-config();
-
-export const {PORT} = process.env;
+export const {PORT, DATABASE_URL} = process.env;
