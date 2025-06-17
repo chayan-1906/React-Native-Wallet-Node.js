@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import {PORT} from "./config/config";
 import {initDB} from "./config/db";
+import rateLimiter from "./middleware/rateLimiter";
 import transactionRoutes from "./routes/TransactionRoutes";
 
 // rest object
@@ -11,6 +12,7 @@ const app = express();
 
 // middlewares
 app.use(cors());
+app.use(rateLimiter);
 app.use(express.json());
 app.use(morgan('dev'));
 
